@@ -4,7 +4,7 @@ services:
   fastapi:
     build: .
     volumes:
-      - ./app:/app
+      - ./url_shortener:/url_shortener
     ports:
       - "8000:8000"
     depends_on:
@@ -19,14 +19,14 @@ services:
       CASSANDRA_USER: $CASSANDRA_USER
       CASSANDRA_PASSWORD: $CASSANDRA_PASSWORD
   redis:
-    image: redis:alpine
+    image: redis:6.2
     ports:
       - "6379:6379"
     environment:
       REDIS_PASSWORD: $REDIS_PASSWORD
 
   cassandra:
-    image: cassandra:latest
+    image: cassandra:5.0.2
     ports:
       - "9042:9042"
     environment:

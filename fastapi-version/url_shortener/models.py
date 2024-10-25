@@ -2,7 +2,7 @@ from cassandra.cluster import Session
 from cassandra.query import SimpleStatement
 from fastapi import Depends
 
-from app.database import get_cassandra_session
+from url_shortener.database import get_cassandra_session
 
 
 class URLModel:

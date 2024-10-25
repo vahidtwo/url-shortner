@@ -11,17 +11,17 @@ anyio==4.6.2.post1
 cassandra-driver==3.29.2
     # via -r requirements/prod.in
 click==8.1.7
-    # via geomet
+    # via
+    #   geomet
+    #   uvicorn
 fastapi==0.115.3
     # via -r requirements/prod.in
 geomet==0.2.1.post1
     # via cassandra-driver
-gevent==24.10.3
-    # via -r requirements/prod.in
-greenlet==3.1.1
-    # via gevent
 gunicorn==23.0.0
     # via -r requirements/prod.in
+h11==0.14.0
+    # via uvicorn
 idna==3.10
     # via anyio
 packaging==24.1
@@ -30,8 +30,15 @@ pydantic==2.9.2
     # via
     #   -r requirements/prod.in
     #   fastapi
+    #   pydantic-settings
 pydantic-core==2.23.4
     # via pydantic
+pydantic-settings==2.6.0
+    # via -r requirements/prod.in
+python-decouple==3.8
+    # via -r requirements/prod.in
+python-dotenv==1.0.1
+    # via pydantic-settings
 redis==5.2.0
     # via -r requirements/prod.in
 six==1.16.0
@@ -45,10 +52,5 @@ typing-extensions==4.12.2
     #   fastapi
     #   pydantic
     #   pydantic-core
-zope-event==5.0
-    # via gevent
-zope-interface==7.1.1
-    # via gevent
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools
+uvicorn==0.32.0
+    # via -r requirements/prod.in

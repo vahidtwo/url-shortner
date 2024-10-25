@@ -12,5 +12,8 @@ my best.**
 
 - [ ] get secrets from vault instead of env file
 - [ ] write some test and consider to mock other units
-- [ ] uncomment volumes 
-
+- [ ] add volume for cassandra
+- [ ] find new cassandra drive that be async
+- [ ] find new redis client that be async
+- [ ] convert functionality form sync to async
+- [ ] test whole project ‼ I know it's not working, but I don't have enough time to implemented and test 🤒

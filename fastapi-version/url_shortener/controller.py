@@ -6,10 +6,10 @@ from cassandra.cluster import Session
 from fastapi import Depends
 from redis import Redis
 
-from app.database import get_cassandra_session, get_redis_client
-from app.models import URLModel
-from app.schemas import UrlShorted
-from app.utils import create_random_key
+from url_shortener.database import get_cassandra_session, get_redis_client
+from url_shortener.models import URLModel
+from url_shortener.schemas import UrlShorted
+from url_shortener.utils import create_random_key
 
 logger = logging.getLogger(__name__)
 
@@ -63,5 +63,5 @@ class UrlShortener:
             self._set_url_in_cache(url, shorted_url)
         except Exception:
             # for more robustness
-            logger.exception(f"failed to set url {shorted_url}")
+            logger.exception(e)
         return url

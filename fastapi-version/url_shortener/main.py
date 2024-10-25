@@ -1,14 +1,12 @@
 from cassandra.cluster import Session
-from fastapi import FastAPI, Depends, HTTPException, Request
+from fastapi import Depends, HTTPException, Request
 from pydantic import validators
 from redis import Redis
 from starlette.responses import RedirectResponse
-
-from app import schemas
-from app.controller import UrlShortener
-from app.database import get_redis_client, get_cassandra_session
-
-app = FastAPI()
+from url_shortener.app import fastapi_app
+from url_shortener import schemas
+from url_shortener.controller import UrlShortener
+from url_shortener.database import get_redis_client, get_cassandra_session
 
 
 def raise_bad_request(message: str):
@@ -20,7 +18,7 @@ def raise_not_found(request: Request):
     raise HTTPException(status_code=404, detail=message)
 
 
-@app.post("/url", response_model=schemas.UrlShorted)
+@fastapi_app.post("/url", response_model=schemas.UrlShorted)
 def create_url(
     urlschema: schemas.URLBase,
     db_session: Session = Depends(get_cassandra_session),
@@ -32,7 +30,7 @@ def create_url(
     return shorted_url
 
 
-@app.get("/{url_key}")
+@fastapi_app.get("/{url_key}")
 def forward_to_target_url(
     url_key: str,
     request: Request,
