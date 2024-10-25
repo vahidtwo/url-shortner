@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 class UrlShortener:
+    """class for controlling shortening URLs functionality"""
     cache_ttl = 60 * 60 * 2
 
     def __init__(
@@ -48,6 +49,7 @@ class UrlShortener:
         self.redis_client.set(shorted_url, url, ex=3600)
 
     def create_url(self, url: str) -> UrlShorted:
+        """create new shorted url and set it to redis for future data access"""
         shorted_url = create_random_key(length=5)
         self._persist_url_in_db(url, shorted_url)
         self._set_url_in_cache(url, shorted_url)
@@ -55,6 +57,11 @@ class UrlShortener:
 
     @lru_cache(maxsize=10_000)
     def get_url(self, shorted_url: str) -> str:
+        """get url based on given shorted url,
+            I used lru cache for frequently accessed URLs
+            then if not set in lru try to get it from redis
+            at the end if we cant find the shorted url, we try to get it from db
+        """
         if url := self._get_shorted_url_and_update_expired(shorted_url):
             return url
 

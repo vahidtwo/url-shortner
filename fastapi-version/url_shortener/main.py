@@ -24,6 +24,7 @@ def create_url(
     db_session: Session = Depends(get_cassandra_session),
     redis_client: Redis = Depends(get_redis_client),
 ):
+    """create shortened url from full pathed url"""
     if not validators.url(urlschema.url):
         raise_bad_request(message="Your provided URL is not valid")
     shorted_url = UrlShortener(db_session=db_session, redis_client=redis_client).create_url(url=urlschema.url)
@@ -37,6 +38,7 @@ def forward_to_target_url(
     db_session: Session = Depends(get_cassandra_session),
     redis_client: Redis = Depends(get_redis_client),
 ):
+    """forward user to target url"""
     shorted_url = UrlShortener(db_session=db_session, redis_client=redis_client).get_url(url_key)
 
     if shorted_url:
