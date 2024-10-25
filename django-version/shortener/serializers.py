@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from shortner.models import ShortUrl
+from shortener.models import ShortUrl
 
 
 class ShortUrlSerializer(serializers.ModelSerializer):

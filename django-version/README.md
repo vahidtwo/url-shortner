@@ -4,5 +4,5 @@ An app that implements a simple URL shortener designed to handle heavy read load
 #### TODO:
 - [ ] get secrets from vault instead of env file
 - [ ] write some test and consider to mock other units 
-
+- [ ] uncomment volumes 
 

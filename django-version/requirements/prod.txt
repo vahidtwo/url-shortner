@@ -66,6 +66,8 @@ python-decouple==3.8
     # via -r requirements/prod.in
 pyyaml==6.0.2
     # via drf-spectacular
+redis==5.2.0
+    # via -r requirements/prod.in
 referencing==0.35.1
     # via
     #   jsonschema

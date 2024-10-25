@@ -2,8 +2,8 @@ from rest_framework import generics, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from shortner.handler import UrlShortenerHandler
-from shortner.serializers import ShortUrlSerializer
+from shortener.handler import UrlShortenerHandler
+from shortener.serializers import ShortUrlSerializer
 
 
 class ShortenerCreateView(generics.GenericAPIView):

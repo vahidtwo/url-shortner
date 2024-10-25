@@ -4,7 +4,7 @@ import string
 from functools import lru_cache
 from typing import Optional
 
-from shortner.models import ShortUrl
+from shortener.models import ShortUrl
 from utils.redis import redis_client
 
 logger = logging.getLogger(__name__)
