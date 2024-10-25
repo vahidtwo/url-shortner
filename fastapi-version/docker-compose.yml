@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build: .
+    volumes:
+      - ./app:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - cassandra
+      - redis
+    environment:
+      REDIS_HOST: $REDIS_HOST
+      REDIS_PORT: 6379
+      CASSANDRA_CLUSTER_NAME: $CASSANDRA_CLUSTER_NAME
+      CASSANDRA_DC: DC1
+      CASSANDRA_REPLICATION_FACTOR: 1
+      CASSANDRA_USER: $CASSANDRA_USER
+      CASSANDRA_PASSWORD: $CASSANDRA_PASSWORD
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: $REDIS_PASSWORD
+
+  cassandra:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+    environment:
+      CASSANDRA_CLUSTER_NAME: $CASSANDRA_CLUSTER_NAME
+      CASSANDRA_DC: DC1
+      CASSANDRA_REPLICATION_FACTOR: 1
+      CASSANDRA_USER: $CASSANDRA_USER
+      CASSANDRA_PASSWORD: $CASSANDRA_PASSWORD
+
+networks:
+  default:
+    external:
+      name: fastapi-network
